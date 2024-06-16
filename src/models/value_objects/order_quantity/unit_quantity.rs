@@ -1,5 +1,5 @@
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub struct UnitQuantity(i32);
+pub struct UnitQuantity(pub(super) i32);
 
 impl UnitQuantity {
     pub fn create(quantity: i32) -> Result<Self, &'static str> {

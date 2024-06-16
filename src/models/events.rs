@@ -1,7 +1,7 @@
-use crate::models::CategorizedEmail;
 use crate::models::value_objects::address::billing_address::BillingAddress;
 use crate::models::value_objects::amount_to_bill::AmountToBill;
 use crate::models::value_objects::order_id::OrderId;
+use crate::models::CategorizedEmail;
 
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct OrderPlaced {

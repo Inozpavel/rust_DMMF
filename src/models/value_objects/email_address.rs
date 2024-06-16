@@ -16,7 +16,3 @@ impl EmailAddress {
         &self.0
     }
 }
-
-
-
-

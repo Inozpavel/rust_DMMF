@@ -4,7 +4,7 @@ pub struct CustomerId(pub i32);
 impl CustomerId {
     pub fn create(value: i32) -> Result<Self, &'static str> {
         if value < 0 {
-            return Err("CustomerId can't be < 0");
+            Err("CustomerId can't be < 0")
         } else {
             Ok(CustomerId(value))
         }
