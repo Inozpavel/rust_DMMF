@@ -1,5 +1,5 @@
-use rust_decimal::Decimal;
 use crate::models::entities::order_line::PricedOrderLine;
+use rust_decimal::Decimal;
 
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct AmountToBill(Decimal);

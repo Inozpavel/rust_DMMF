@@ -1,5 +1,5 @@
-use rust_decimal::Decimal;
 use crate::models::value_objects::product_code::ProductCode;
+use rust_decimal::Decimal;
 
 pub trait CheckProductCodeExistsService {
     async fn check(&self, product_code: &ProductCode) -> bool;
