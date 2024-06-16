@@ -1,18 +1,25 @@
 use crate::models::unvalidated::unvalidated_customer::UnvalidatedCustomerInfo;
-use crate::models::value_objects::customer_id::CustomerId;
+use crate::models::value_objects::email_address::EmailAddress;
+use crate::models::value_objects::personal_name::PersonalName;
+use crate::models::value_objects::string50::String50;
 
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct CustomerInfo {
-    id: CustomerId,
+    personal_name: PersonalName,
+    email_address: EmailAddress,
 }
 
 impl CustomerInfo {
     pub fn create(unvalidated_customer: UnvalidatedCustomerInfo) -> Result<Self, &'static str> {
-        CustomerInfo { id }
-    }
+        let email_address = EmailAddress::create(unvalidated_customer.email)?;
+        let first_name = String50::create(unvalidated_customer.first_name).unwrap();
+        let last_name = String50::create(unvalidated_customer.last_name).unwrap();
 
-    pub fn value(&self) -> &CustomerId {
-        &self.id
+        let personal_name = PersonalName::new(first_name, last_name);
+        Ok(CustomerInfo {
+            email_address,
+            personal_name,
+        })
     }
 }
 

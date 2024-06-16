@@ -17,3 +17,7 @@ pub mod price;
 pub mod amount_to_bill;
 
 pub mod email_address;
+
+pub mod string50;
+
+pub mod personal_name;

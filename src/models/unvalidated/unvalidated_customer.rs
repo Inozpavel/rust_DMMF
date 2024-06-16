@@ -1,5 +1,5 @@
 pub struct UnvalidatedCustomerInfo {
-    first_name: String,
-    last_name: String,
-    email: String,
+    pub first_name: String,
+    pub last_name: String,
+    pub email: String,
 }
