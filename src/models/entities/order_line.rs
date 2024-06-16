@@ -4,6 +4,7 @@ use crate::models::value_objects::order_quantity::OrderQuantity;
 use crate::models::value_objects::price::Price;
 use crate::models::value_objects::product_code::ProductCode;
 
+#[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct ValidatedOrderLine {
     id: OrderLineId,
     product_code: ProductCode,
@@ -13,7 +14,6 @@ pub struct ValidatedOrderLine {
 impl ValidatedOrderLine {
     pub fn create(order_line: UnvalidatedOrderLine) -> Result<Self, &'static str> {
         let line_id = OrderLineId::create(order_line.id)?;
-
 
         let product_code = ProductCode::create(order_line.product_code)?;
         let quantity = OrderQuantity::create(&product_code, order_line.order_quantity)?;
@@ -32,6 +32,7 @@ impl ValidatedOrderLine {
     }
 }
 
+#[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct PricedOrderLine {
     id: OrderLineId,
     product_code: ProductCode,
@@ -55,4 +56,3 @@ impl PricedOrderLine {
         &self.price
     }
 }
-

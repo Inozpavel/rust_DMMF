@@ -9,6 +9,6 @@ pub trait CheckAddressExistsService {
     async fn check(&self, product_code: &ProductCode) -> bool;
 }
 
-pub trait GetProductPriceService {
+pub trait ProductPriceService {
     async fn get(&self, code: &ProductCode) -> Result<Decimal, &'static str>;
 }
