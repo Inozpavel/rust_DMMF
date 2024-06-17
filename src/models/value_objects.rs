@@ -21,3 +21,9 @@ pub mod email_address;
 pub mod string50;
 
 pub mod personal_name;
+
+pub mod html_string;
+
+pub mod order_acknowledgment;
+
+pub mod send_result;

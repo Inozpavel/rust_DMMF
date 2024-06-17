@@ -36,17 +36,18 @@ impl ValidatedOrderLine {
 pub struct PricedOrderLine {
     id: OrderLineId,
     product_code: ProductCode,
-    order_quantity: OrderQuantity,
+    product_quantity: OrderQuantity,
     price: Price,
 }
 
 impl PricedOrderLine {
-    pub fn create(line: ValidatedOrderLine, price: Price) -> Self {
-        let result = PricedOrderLine {
+    pub fn create(line: ValidatedOrderLine, product_price: Price) -> Self {
+        let price = product_price.multiply(&line.order_quantity);
+        let result = Self {
             price,
             id: line.id,
             product_code: line.product_code,
-            order_quantity: line.order_quantity,
+            product_quantity: line.order_quantity,
         };
 
         result

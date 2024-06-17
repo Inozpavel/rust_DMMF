@@ -29,4 +29,4 @@ impl OrderQuantity {
             Ok(result)
         }
     }
-}
+}    

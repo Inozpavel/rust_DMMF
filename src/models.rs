@@ -16,11 +16,11 @@ pub enum PlaceOrderError {
     ValidationError(Vec<ValidationError>),
 }
 
-#[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub enum CategorizedEmail {
-    Quote,
-    Order,
-}
+// #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
+// pub enum CategorizedEmail {
+//     Quote,
+//     Order,
+// }
 
 struct InvoiceId(String);
 

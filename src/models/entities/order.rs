@@ -63,6 +63,10 @@ impl PricedOrder {
             amount_to_bill,
         }
     }
+
+    pub fn into_inner(self) -> (OrderId, AmountToBill, CustomerInfo, Vec<PricedOrderLine>) {
+        (self.order_id, self.amount_to_bill, self.customer_info, self.order_lines)
+    }
 }
 
 pub enum Order {

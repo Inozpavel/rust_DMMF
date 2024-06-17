@@ -21,6 +21,10 @@ impl CustomerInfo {
             personal_name,
         })
     }
+
+    pub fn into_inner(self) -> (PersonalName, EmailAddress) {
+        (self.personal_name, self.email_address)
+    }
 }
 
 pub mod first_name {}
