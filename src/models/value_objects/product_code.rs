@@ -35,8 +35,8 @@ impl ProductCode {
 
     pub fn get_ref(&self) -> &str {
         match self {
-            ProductCode::Widget(widget) => widget.get_ref(),
-            ProductCode::Gizmo(gizmo_code) => gizmo_code.get_ref(),
+            ProductCode::Widget(widget) => &widget.0,
+            ProductCode::Gizmo(gizmo_code) => &gizmo_code.0,
         }
     }
 }
