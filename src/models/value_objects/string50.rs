@@ -1,5 +1,6 @@
+#[readonly::make]
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub struct String50(String);
+pub struct String50(pub String);
 
 impl String50 {
     pub fn create(s: String) -> Option<Self> {
@@ -8,9 +9,5 @@ impl String50 {
         } else {
             None
         }
-    }
-
-    pub fn get_ref(&self) -> &String {
-        &self.0
     }
 }

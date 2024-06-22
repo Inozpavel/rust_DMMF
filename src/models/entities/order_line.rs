@@ -3,11 +3,12 @@ use crate::models::value_objects::order_line_id::OrderLineId;
 use crate::models::value_objects::order_quantity::OrderQuantity;
 use crate::models::value_objects::price::Price;
 use crate::models::value_objects::product_code::ProductCode;
+use std::rc::Rc;
 
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct ValidatedOrderLine {
-    id: OrderLineId,
-    product_code: ProductCode,
+    id: Rc<OrderLineId>,
+    product_code: Rc<ProductCode>,
     order_quantity: OrderQuantity,
 }
 
@@ -19,8 +20,8 @@ impl ValidatedOrderLine {
         let quantity = OrderQuantity::create(&product_code, order_line.order_quantity)?;
 
         let result = ValidatedOrderLine {
-            id: line_id,
-            product_code,
+            id: Rc::new(line_id),
+            product_code: Rc::new(product_code),
             order_quantity: quantity,
         };
 
@@ -34,19 +35,19 @@ impl ValidatedOrderLine {
 
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct PricedOrderLine {
-    id: OrderLineId,
-    product_code: ProductCode,
+    id: Rc<OrderLineId>,
+    product_code: Rc<ProductCode>,
     product_quantity: OrderQuantity,
     price: Price,
 }
 
 impl PricedOrderLine {
-    pub fn create(line: ValidatedOrderLine, product_price: Price) -> Self {
+    pub fn create(line: &ValidatedOrderLine, product_price: Price) -> Self {
         let price = product_price.multiply(&line.order_quantity);
         let result = Self {
             price,
-            id: line.id,
-            product_code: line.product_code,
+            id: line.id.clone(),
+            product_code: line.product_code.clone(),
             product_quantity: line.order_quantity,
         };
 

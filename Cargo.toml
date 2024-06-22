@@ -8,3 +8,4 @@ rust_decimal = { version = "1.35.0" }
 thiserror = "1.0.61"
 chrono = "0.4.38"
 futures = "0.3.30"
+readonly = "0.2.12"

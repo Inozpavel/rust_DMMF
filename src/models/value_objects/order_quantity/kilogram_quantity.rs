@@ -1,10 +1,15 @@
 use rust_decimal::Decimal;
 
-#[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub struct KilogramQuantity(pub(super) Decimal);
+#[readonly::make]
+#[derive(Ord, PartialOrd, Eq, PartialEq, Debug, Copy, Clone)]
+pub struct KilogramQuantity(pub Decimal);
 
 impl KilogramQuantity {
-    pub fn get(&self) -> Decimal {
-        self.0
+    pub fn create(value: Decimal) -> Result<Self, &'static str> {
+        if value <= Decimal::from(0) {
+            Err("KilogramQuantity must be > 0")
+        } else {
+            Ok(Self(value))
+        }
     }
 }

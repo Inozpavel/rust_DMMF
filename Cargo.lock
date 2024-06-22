@@ -154,6 +154,7 @@ version = "0.1.0"
 dependencies = [
  "chrono",
  "futures",
+ "readonly",
  "rust_decimal",
  "thiserror",
 ]
@@ -488,6 +489,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c"
 dependencies = [
  "getrandom",
+]
+
+[[package]]
+name = "readonly"
+version = "0.2.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a25d631e41bfb5fdcde1d4e2215f62f7f0afa3ff11e26563765bd6ea1d229aeb"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.66",
 ]
 
 [[package]]

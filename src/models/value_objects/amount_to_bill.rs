@@ -1,17 +1,16 @@
 use crate::models::entities::order_line::PricedOrderLine;
 use rust_decimal::Decimal;
 
-#[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub struct AmountToBill(Decimal);
+#[readonly::make]
+#[derive(Ord, PartialOrd, Eq, PartialEq, Debug, Copy, Clone)]
+pub struct AmountToBill(pub Decimal);
 
 impl AmountToBill {
+    pub const ZERO: AmountToBill = AmountToBill(Decimal::ZERO);
+
     pub fn sum_prices(lines: &Vec<PricedOrderLine>) -> Self {
-        let sum = lines.iter().map(|x| x.get_price().get_value()).sum();
+        let sum = lines.iter().map(|x| x.get_price().0).sum();
 
         Self(sum)
-    }
-
-    pub fn get_value(&self) -> Decimal {
-        self.0
     }
 }

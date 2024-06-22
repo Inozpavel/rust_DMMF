@@ -1,5 +1,6 @@
-#[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub struct UnitQuantity(pub(super) i32);
+#[readonly::make]
+#[derive(Ord, PartialOrd, Eq, PartialEq, Debug, Copy, Clone)]
+pub struct UnitQuantity(pub i32);
 
 impl UnitQuantity {
     pub fn create(quantity: i32) -> Result<Self, &'static str> {
@@ -10,9 +11,5 @@ impl UnitQuantity {
         } else {
             Ok(UnitQuantity(quantity))
         }
-    }
-
-    pub fn get(&self) -> i32 {
-        self.0
     }
 }

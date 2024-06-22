@@ -1,3 +1,4 @@
+#[readonly::make]
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct OrderLineId(String);
 
@@ -8,9 +9,5 @@ impl OrderLineId {
         } else {
             Ok(OrderLineId(s))
         }
-    }
-
-    pub fn get_ref(&self) -> &str {
-        &self.0
     }
 }

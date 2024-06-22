@@ -8,7 +8,7 @@ use crate::models::value_objects::product_code::ProductCode;
 pub mod kilogram_quantity;
 pub mod unit_quantity;
 
-#[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
+#[derive(Ord, PartialOrd, Eq, PartialEq, Debug, Copy, Clone)]
 pub enum OrderQuantity {
     Unit(UnitQuantity),
     Kilogram(KilogramQuantity),
@@ -22,11 +22,11 @@ impl OrderQuantity {
             let result = match code {
                 ProductCode::Widget(_) => match value.to_i32() {
                     None => return Err("Unit quantity must be an integer"),
-                    Some(v) => OrderQuantity::Unit(UnitQuantity(v)),
+                    Some(v) => OrderQuantity::Unit(UnitQuantity::create(v)?),
                 },
-                ProductCode::Gizmo(_) => OrderQuantity::Kilogram(KilogramQuantity(value)),
+                ProductCode::Gizmo(_) => OrderQuantity::Kilogram(KilogramQuantity::create(value)?),
             };
             Ok(result)
         }
     }
-}    
+}

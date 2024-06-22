@@ -1,5 +1,6 @@
+#[readonly::make]
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub struct WidgetCode(String);
+pub struct WidgetCode(pub String);
 
 impl WidgetCode {
     pub fn create(value: String) -> Result<Self, &'static str> {
@@ -8,8 +9,5 @@ impl WidgetCode {
         } else {
             Ok(Self(value))
         }
-    }
-    pub fn get_ref(&self) -> &str {
-        &self.0
     }
 }

@@ -1,3 +1,5 @@
+use std::fmt::{Display, Formatter};
+
 use crate::models::value_objects::product_code::gizmo_code::GizmoCode;
 use crate::models::value_objects::product_code::widget_code::WidgetCode;
 
@@ -8,6 +10,15 @@ pub mod widget_code;
 pub enum ProductCode {
     Widget(WidgetCode),
     Gizmo(GizmoCode),
+}
+
+impl Display for ProductCode {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ProductCode::Widget(w) => write!(f, "{}", w.0),
+            ProductCode::Gizmo(g) => write!(f, "{}", g.0),
+        }
+    }
 }
 
 impl ProductCode {

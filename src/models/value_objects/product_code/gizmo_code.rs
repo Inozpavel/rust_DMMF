@@ -1,5 +1,6 @@
+#[readonly::make]
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub struct GizmoCode(String);
+pub struct GizmoCode(pub String);
 
 impl GizmoCode {
     pub fn create(value: String) -> Result<Self, &'static str> {
@@ -8,8 +9,5 @@ impl GizmoCode {
         } else {
             Ok(Self(value))
         }
-    }
-    pub fn get_ref(&self) -> &str {
-        &self.0
     }
 }

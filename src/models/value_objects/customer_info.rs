@@ -2,11 +2,13 @@ use crate::models::unvalidated::unvalidated_customer::UnvalidatedCustomerInfo;
 use crate::models::value_objects::email_address::EmailAddress;
 use crate::models::value_objects::personal_name::PersonalName;
 use crate::models::value_objects::string50::String50;
+use std::rc::Rc;
 
+#[readonly::make]
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct CustomerInfo {
-    personal_name: PersonalName,
-    email_address: EmailAddress,
+    pub personal_name: Rc<PersonalName>,
+    pub email_address: Rc<EmailAddress>,
 }
 
 impl CustomerInfo {
@@ -17,13 +19,9 @@ impl CustomerInfo {
 
         let personal_name = PersonalName::new(first_name, last_name);
         Ok(CustomerInfo {
-            email_address,
-            personal_name,
+            email_address: Rc::new(email_address),
+            personal_name: Rc::new(personal_name),
         })
-    }
-
-    pub fn into_inner(self) -> (PersonalName, EmailAddress) {
-        (self.personal_name, self.email_address)
     }
 }
 

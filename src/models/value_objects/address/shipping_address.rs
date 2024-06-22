@@ -1,5 +1,6 @@
+#[readonly::make]
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
-pub struct ShippingAddress(String);
+pub struct ShippingAddress(pub String);
 
 impl ShippingAddress {
     pub fn create(s: String) -> Result<Self, &'static str> {
@@ -8,9 +9,5 @@ impl ShippingAddress {
         } else {
             Ok(ShippingAddress(s))
         }
-    }
-
-    pub fn get_ref(&self) -> &str {
-        &self.0
     }
 }

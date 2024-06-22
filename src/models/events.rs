@@ -1,19 +1,29 @@
-use crate::models::value_objects::address::billing_address::BillingAddress;
+use std::rc::Rc;
+
 use crate::models::value_objects::amount_to_bill::AmountToBill;
-use crate::models::value_objects::order_id::OrderId;
 use crate::models::value_objects::email_address::EmailAddress;
 use crate::models::value_objects::order_acknowledgment::OrderAcknowledgment;
+use crate::models::value_objects::order_id::OrderId;
 
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct OrderPlaced {
-    order_id: OrderId,
+    order_id: Rc<OrderId>,
 }
 
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct BillableOrderPlaced {
-    order_id: OrderId,
-    billing_address: BillingAddress,
+    order_id: Rc<OrderId>,
+    // billing_address: BillingAddress,
     amount_to_bill: AmountToBill,
+}
+
+impl BillableOrderPlaced {
+    pub fn create(order_id: Rc<OrderId>, amount_to_bill: AmountToBill) -> Self {
+        BillableOrderPlaced {
+            order_id,
+            amount_to_bill,
+        }
+    }
 }
 
 pub enum PlaceOrderEvent {
@@ -22,25 +32,17 @@ pub enum PlaceOrderEvent {
     AcknowledgementSent(OrderAcknowledgementSent),
 }
 
-// pub struct PlaceOrderEvents {
-//     acnowledgment_sent: AcnowledgmentSent,
-//     order_placed: OrderPlaced,
-//     billable_order_placed: BillableOrderPlaced,
-// }
-
 #[derive(Ord, PartialOrd, Eq, PartialEq, Debug)]
 pub struct OrderAcknowledgementSent {
-    order_id: OrderId,
-    email_address: EmailAddress,
+    order_id: Rc<OrderId>,
+    email_address: Rc<EmailAddress>,
 }
 
 impl OrderAcknowledgementSent {
-    pub fn create(order_id: OrderId, order_acknowledgment: OrderAcknowledgment) -> Self {
-        let (email, _letter) = order_acknowledgment.into_inner();
+    pub fn create(order_id: Rc<OrderId>, order_acknowledgment: OrderAcknowledgment) -> Self {
         Self {
-            email_address: email,
+            email_address: order_acknowledgment.email_address.clone(),
             order_id,
         }
     }
 }
-
