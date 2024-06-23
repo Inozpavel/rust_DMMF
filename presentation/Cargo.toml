@@ -1,0 +1,8 @@
+[package]
+name = "domain-modelling-made-functional"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+application = { path = "../application" }
+
