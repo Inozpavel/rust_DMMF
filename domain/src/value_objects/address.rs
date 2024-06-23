@@ -1,4 +1,4 @@
-use crate::services::CheckAddressExistsService;
+use crate::services::check_address_exists_service::CheckAddressExistsService;
 use crate::unvalidated::unvalidated_address::UnvalidatedAddress;
 use crate::value_objects::string50::String50;
 use std::rc::Rc;

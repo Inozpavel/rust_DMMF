@@ -41,8 +41,8 @@ impl ValidatedOrder {
 pub struct PricedOrder {
     pub order_id: Rc<OrderId>,
     pub customer_info: Rc<CustomerInfo>,
-    shipping_address: Rc<Address>,
-    billing_address: Rc<Address>,
+    pub shipping_address: Rc<Address>,
+    pub billing_address: Rc<Address>,
     pub order_lines: Vec<PricedOrderLine>,
     pub amount_to_bill: AmountToBill,
 }
